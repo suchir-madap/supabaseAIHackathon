@@ -1,3 +1,16 @@
+## install pnpm
+
+- if you have npm installed
+npm install -g pnpm
+
+
+
+
+pnpm install
+
+pnpm run dev
+
+
 This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
 
 ## Getting Started
