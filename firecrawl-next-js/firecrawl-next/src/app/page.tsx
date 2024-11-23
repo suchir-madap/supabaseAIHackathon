@@ -5,15 +5,6 @@ import Markdown from 'markdown-to-jsx';
 
 const app = new FirecrawlApp({ apiKey: process.env.NEXT_PUBLIC_FIRECRAWL });
 
-// Function to remove images from markdown
-const removeImages = (markdown: string) => {
-  return markdown
-    .replace(/!\[.*?\]\(.*?\)/g, '') // Remove ![alt](url) format
-    .replace(/<img[^>]*>/g, '')      // Remove HTML <img> tags
-    .replace(/\[\[.*?\]\]/g, '')     // Remove [[image]] wiki-style format
-    .replace(/\n\s*\n/g, '\n\n');    // Clean up extra newlines
-};
-
 export default function HomePage() {
   const [url, setUrl] = useState<string>("");
   const [response, setResponse] = useState<ScrapeResponse | null>(null);
