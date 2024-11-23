@@ -2,6 +2,8 @@ import { supabase } from "./core/store";
 
 const apiUrl = "https://supabase-ai-hackathon.vercel.app/api/claude";
 
+
+
 const queryApiRoute = async (url: string) => {
   // const testUrl = "https://example.com";
 
@@ -15,7 +17,7 @@ const queryApiRoute = async (url: string) => {
   const data = await response.json();
   console.log("response from api", data);
 
-  
+
 };
 
 chrome.runtime.onInstalled.addListener(() => {
