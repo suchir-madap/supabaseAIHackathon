@@ -2,7 +2,11 @@
 import { useState } from 'react';
 import FirecrawlApp, { type ScrapeResponse } from '@mendable/firecrawl-js';
 
+
+
 const app = new FirecrawlApp({ apiKey: process.env.NEXT_PUBLIC_FIRECRAWL });
+
+
 
 export default function HomePage() {
   const [url, setUrl] = useState<string>(''); // State to store the input URL
