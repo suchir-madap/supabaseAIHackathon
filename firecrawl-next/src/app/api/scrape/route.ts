@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const { url } = await request.json();
 
     const scrapeResult = await app.scrapeUrl(url, {
-      formats: ["markdown"],
+      formats: ["extract"],
     });
 
     if (!scrapeResult.success) {
@@ -28,9 +28,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (scrapeResult.markdown) {
-      scrapeResult.markdown = removeImages(scrapeResult.markdown);
-    }
+    // if (scrapeResult.markdown) {
+    //   scrapeResult.markdown = removeImages(scrapeResult.markdown);
+    // }
 
     return NextResponse.json(scrapeResult);
   } catch (error) {

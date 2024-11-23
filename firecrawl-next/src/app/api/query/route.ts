@@ -45,10 +45,9 @@ export async function POST(request: NextRequest) {
   
         const scrapeData = await scrapeResponse.json();
         console.log("scrapedata",scrapeData)
-        console.log("markdown Scraped",scrapeData.markdown)
+        // console.log("markdown Scraped",scrapeData.markdown)
 
         
-
 
 
         const claudeResponse = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/claude`, {
@@ -57,7 +56,7 @@ export async function POST(request: NextRequest) {
               'Content-Type': 'application/json',
             },
             // @ts-ignore÷
-            body: JSON.stringify({ scrapeData.markdown })
+            body: JSON.stringify(scrapeData.extract)
             
           });
         

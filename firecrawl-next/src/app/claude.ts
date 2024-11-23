@@ -26,21 +26,21 @@ Return a JSON array where each element has this format:
 }
 `;
 
-async function analyzeSentiments(sentences: string): Promise<SentimentResult[] | null> {
+async function analyzeSentiments(sentence: string): Promise<SentimentResult[] | null> {
   try {
 
     
-    // removed images
-    sentences = sentences
-        .replace(/!\[.*?\]\(.*?\)/g, '')
-        .replace(/<img[^>]*>/g, '')
-        .replace(/\[\[.*?\]\]/g, '')
-        .replace(/\n\s*\n/g, '\n\n');
+    // // removed images
+    // sentences = sentences
+    //     .replace(/!\[.*?\]\(.*?\)/g, '')
+    //     .replace(/<img[^>]*>/g, '')
+    //     .replace(/\[\[.*?\]\]/g, '')
+    //     .replace(/\n\s*\n/g, '\n\n');
     
-    const sentence = sentences
-        .split('.')
-        .filter(sentence => sentence.trim().length > 0)
-        .map(sentence => sentence.trim());
+    // const sentence = sentences
+    //     .split('.')
+    //     .filter(sentence => sentence.trim().length > 0)
+    //     .map(sentence => sentence.trim());
     
         
 

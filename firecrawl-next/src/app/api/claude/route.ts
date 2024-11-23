@@ -8,13 +8,14 @@ export async function POST(request: NextRequest) {
     try {
       const body = await request.json();
       
+      console.log("Inside Claude 1")
       if (!body.sentences) {
         return NextResponse.json(
           { error: 'Invalid request. Expected array of sentences.' },
           { status: 400 }
         );
       }
-  
+      console.log("Inside Claude 2")
       const results = await analyzeSentiments(body.sentences);
       
       if (!results) {
