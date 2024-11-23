@@ -4,6 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/supabase/supabase-js-client"
 import FirecrawlApp, { type ScrapeResponse } from "@mendable/firecrawl-js";
 import Markdown from 'markdown-to-jsx';
+import type { SentimentResult } from './types.ts';
 
 const app = new FirecrawlApp({ apiKey: process.env.NEXT_PUBLIC_FIRECRAWL });
 
@@ -23,6 +24,8 @@ export default function Dashboard() {
     const [historyItems, setHistoryItems] = useState<any[]>([]);
     const [historyError, setHistoryError] = useState<string | null>(null);
     const [isHistoryLoading, setIsHistoryLoading] = useState(false);
+    const [sentiments, setSentiments] = useState<SentimentResult[] | null>(null);
+    const [analyzingText, setAnalyzingText] = useState(false);
 
     async function getHistory() {
         setIsHistoryLoading(true);
@@ -85,6 +88,34 @@ export default function Dashboard() {
     const testApiRoute = async () => {
         const response = await fetch("/api/claude");
         console.log(response);
+    };
+
+    const extractPlainText = (markdown: string): string[] => {
+        // Remove markdown syntax and split into sentences
+        const plainText = markdown
+            .replace(/[#*`_\[\]()]/g, '')
+            .replace(/\n+/g, ' ')
+            .trim();
+        
+        return plainText
+            .split(/[.!?]+/)
+            .map(s => s.trim())
+            .filter(s => s.length > 0);
+    };
+
+    const handleAnalyze = async () => {
+        if (!response?.markdown) return;
+        
+        setAnalyzingText(true);
+        try {
+            const sentences = extractPlainText(response.markdown);
+            const results = await analyzeSentiments(sentences);
+            setSentiments(results);
+        } catch (err) {
+            setError(`Analysis failed: ${err instanceof Error ? err.message : "Unknown error"}`);
+        } finally {
+            setAnalyzingText(false);
+        }
     };
 
     return (
@@ -184,6 +215,45 @@ export default function Dashboard() {
                     <div style={{ backgroundColor: "white", padding: "15px", borderRadius: "4px" }}>
                         <Markdown>{response.markdown || ''}</Markdown>
                     </div>
+
+                    <div style={{ marginTop: "20px" }}>
+                        <button
+                            onClick={handleAnalyze}
+                            disabled={analyzingText}
+                            style={{
+                                padding: "10px 20px",
+                                backgroundColor: "#4CAF50",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "4px",
+                                cursor: analyzingText ? "not-allowed" : "pointer"
+                            }}
+                        >
+                            {analyzingText ? "Analyzing..." : "Analyze Sentiments"}
+                        </button>
+                    </div>
+
+                    {sentiments && (
+                        <div style={{ marginTop: "20px" }}>
+                            <h2>Sentiment Analysis:</h2>
+                            {sentiments.map((sentiment, index) => (
+                                <div 
+                                    key={index} 
+                                    style={{
+                                        padding: "10px",
+                                        margin: "10px 0",
+                                        backgroundColor: "white",
+                                        borderRadius: "4px",
+                                        border: "1px solid #ddd"
+                                    }}
+                                >
+                                    <p><strong>Sentence:</strong> {sentiment.sentence}</p>
+                                    <p><strong>Rating:</strong> {sentiment.rating}/5</p>
+                                    <p><strong>Explanation:</strong> {sentiment.explanation}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
         </div>
