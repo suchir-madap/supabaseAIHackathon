@@ -22,6 +22,18 @@ ${exampleOfFarRight}
 This is the second example of far-right
 ${exampleOfFarRight2}
 
+Now using the examples return back a rating from 1-5 whethe the contest is far-right, far-left, left, right or center.
+
+5 being far right
+
+1 being far left
+
+4 being right
+
+2 being left
+
+3 being center
+
 `
 
 `
