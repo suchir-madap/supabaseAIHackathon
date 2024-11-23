@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { analyzeSentiments, type SentimentResult } from '@/app/claude';
 
+import FirecrawlApp, { type ScrapeResponse } from "@mendable/firecrawl-js";
+import Markdown from 'markdown-to-jsx';
+
+const app = new FirecrawlApp({ apiKey: process.env.NEXT_PUBLIC_FIRECRAWL });
 
 
 export async function POST(request: NextRequest) {
@@ -23,6 +27,8 @@ export async function POST(request: NextRequest) {
           { status: 500 }
         );
       }
+
+      
   
       return NextResponse.json(results, { status: 200 });
     } catch (error) {
@@ -37,9 +43,27 @@ export async function POST(request: NextRequest) {
 
 
 // Optionally, you can also handle GET requests
-export async function GET() {
+/* export async function GET() {
   return NextResponse.json(
     { message: 'Claude API endpoint' },
+    { status: 200 }
+  );
+}
+ */
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const url = searchParams.get('url');
+
+  if (!url) {
+    return NextResponse.json(
+      { error: 'URL parameter is required' },
+      { status: 400 }
+    );
+  }
+
+  return NextResponse.json(
+    { message: 'Claude API endpoint', analyzedUrl: url },
     { status: 200 }
   );
 }

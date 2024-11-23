@@ -97,8 +97,18 @@ const apiUrl = "https://supabase-ai-hackathon.vercel.app/api/claude"
 
 function IndexPopup() {
 
-  const queryApiRoute = async () => {
+  /* const queryApiRoute = async () => {
     const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log(data);
+  }; */
+
+  const queryApiRoute = async () => {
+    // Get the current tab's URL (example URL for testing)
+    const testUrl = "https://example.com";
+    
+    // Add URL as query parameter
+    const response = await fetch(`${apiUrl}?url=${encodeURIComponent(testUrl)}`);
     const data = await response.json();
     console.log(data);
   };
