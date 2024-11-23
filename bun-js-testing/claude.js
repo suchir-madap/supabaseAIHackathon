@@ -6,6 +6,12 @@ const anthropic = new Anthropic();
 
 // put in examples of what is right, left, and center
 
+// Left Example - Access to affordable healthcare is a fundamental right that the government must protect. The for-profit healthcare system has failed millions, and reform is overdue. Expanding Medicare to include all Americans would reduce inequality and improve the quality of life for everyone, not just the wealthy elite who can afford high-end insurance. 
+// Far Right  Example - The recent surge in illegal immigration is a direct threat to our national security and economic stability. Policies that encourage open borders not only weaken the fabric of our society but also prioritize criminals over law-abiding citizens. America must stand firm and put the safety of its citizens first, even if it means harsher border policies. Politicians who ignore these realities are betraying their country for the sake of globalist agendas.
+// Right Example - Rising crime rates in urban areas highlight the need for strong law enforcement and stricter policies. While community-focused programs have their merits, they cannot replace the importance of a well-funded police force. America thrives on law and order, and we must prioritize it to ensure the safety and well-being of all citizens.
+// Center Example - The debate over renewable energy versus fossil fuels is complex, with valid arguments on both sides. While renewable energy is essential for sustainability, transitioning too quickly could disrupt the economy. Policymakers must find a balanced approach that supports innovation without disregarding the needs of workers in traditional energy sectors.
+// Far Left Example  - Corporate greed is destroying the planet, and the government has done little to stop it. Big Oil continues to pump billions into lobbying efforts, while communities suffer from polluted water, unbreathable air, and worsening climate disasters. The only solution is to dismantle the capitalist structures that prioritize profit over human lives and implement radical reforms to redistribute wealth and protect the environment.
+
 const exampleOfFarRight2 = ``
 
 const exampleOfFarRight = `
