@@ -70,8 +70,7 @@ export async function POST(request: NextRequest) {
               console.log("parseRating", parseRating);
 
               return NextResponse.json(
-                { message: 'Success' },
-                { rating: parseRating.rating },
+                { rating: parseRating.rating, message: "Success" },
                 { status: 200 }
             );
         }

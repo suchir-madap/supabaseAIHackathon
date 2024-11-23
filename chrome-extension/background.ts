@@ -17,7 +17,7 @@ const queryApiRoute = async (url: string) => {
   const data = await response.json();
   console.log("response from api", data);
 
-
+  
 };
 
 chrome.runtime.onInstalled.addListener(() => {
