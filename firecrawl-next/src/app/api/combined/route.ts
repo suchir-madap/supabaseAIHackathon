@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
         if (url) {
             const scrapeResult = await app.scrapeUrl(url, {
-                formats: ["extract"],
+                formats: ["markdown"],
             });
             console.log("scrapeResult", scrapeResult)
 
@@ -84,7 +84,28 @@ export async function POST(request: NextRequest) {
               });
 
               console.log("msg from claude  ", msg)
+            
+            const { data: urlData, error } = await supabase
+                .from('urls')
+                .insert([{ urlString: url }])
+                .select()
+            console.log(error)
+
+            const { data: analysisData, error: analysisError } = await supabase
+                .from('globalUrlAnalysis')
+                .insert([
+                    {
+                        urlId: urlData![0].id,  // Reference the id from the urls table
+                        url: url,
+                        scrapedOutput: scrapeResult,
+                        rating: msg.content
+
+                    }
+                ])
+                .select();
         }
+
+        
 
         return NextResponse.json(
           { message: 'the end' },
