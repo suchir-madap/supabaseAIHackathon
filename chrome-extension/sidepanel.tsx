@@ -80,7 +80,7 @@ function IndexPopup() {
   }; */
 
   return (
-    <div className="plasmo-flex plasmo-items-center plasmo-justify-center plasmo-h-16 plasmo-w-40">
+    <div className="flex items-center justify-center h-16 w-40">
       <CountButton />
       <h1>Hello World</h1>
 

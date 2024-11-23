@@ -71,6 +71,7 @@ export async function POST(request: NextRequest) {
 
               return NextResponse.json(
                 { message: 'Success' },
+                { rating: parseRating.rating },
                 { status: 200 }
             );
         }

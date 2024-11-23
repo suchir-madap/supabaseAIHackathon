@@ -1,6 +1,6 @@
 import { supabase } from "./core/store";
 
-const apiUrl = "https://supabase-ai-hackathon.vercel.app/api/claude";
+const apiUrl = "https://supabase-ai-hackathon.vercel.app/api/combined";
 
 
 
@@ -50,6 +50,9 @@ chrome.history.onVisited.addListener(async (historyItem) => {
     console.log("data from upload", data);
 
     if (historyItem.url && historyItem.url !== "") {
+
+
+      console.log('historItem.url', historyItem.url)
       // query the api route
       await queryApiRoute(historyItem.url);
     }
