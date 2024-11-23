@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
       const searchParams = request.nextUrl.searchParams;
       const url = searchParams.get('url');
 
-      console.log("url", url)
+      console.log("url at the top of combined", url)
 
       // first check if there is already a record for this url
       const { data, error } = await supabase.from('urls').select('*').eq('url', url);
