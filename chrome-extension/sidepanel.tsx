@@ -24,7 +24,7 @@ function IndexPopup() {
   }; */
 
   // as post request
-  const queryApiRoute = async () => {
+  /* const queryApiRoute = async () => {
     // Get the current tab's URL (example URL for testing)
     const testUrl = "https://example.com";
     
@@ -35,6 +35,20 @@ function IndexPopup() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ url: testUrl })
+    });
+    const data = await response.json();
+    console.log(data);
+  }; */
+
+  const queryApiRoute = async () => {   
+    const testUrl = "https://example.com";
+
+    // Add URL as query parameter
+    const response = await fetch(`${apiUrl}?url=${encodeURIComponent(testUrl)}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
     const data = await response.json();
     console.log(data);
