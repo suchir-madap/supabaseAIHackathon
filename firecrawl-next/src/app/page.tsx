@@ -14,6 +14,23 @@ const removeImages = (markdown: string) => {
       .replace(/\n\s*\n/g, '\n\n');    // Clean up extra newlines
 };
 
+// const apiUrl = "https://supabase-ai-hackathon.vercel.app/api/claude"
+
+
+const queryApiRoute = async () => {   
+  const testUrl = "https://example.com";
+
+  // Add URL as query parameter
+  const response = await fetch(`/api/claude?url=${encodeURIComponent(testUrl)}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  const data = await response.json();
+  console.log(data);
+};
+
 
 export default function HomePage() {
   const [url, setUrl] = useState<string>("");
@@ -91,6 +108,10 @@ export default function HomePage() {
         </button>
         <button onClick={testApiRoute}>Test API Route</button>
       </div>
+
+      <button onClick={queryApiRoute}>
+        api route
+      </button>
 
       {error && (
         <div style={{ color: "red", marginTop: "10px" }}>
