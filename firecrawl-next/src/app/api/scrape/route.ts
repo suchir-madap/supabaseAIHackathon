@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import FirecrawlApp from "@mendable/firecrawl-js";
 
-const app = new FirecrawlApp({ apiKey: process.env.FIRECRAWL_API_KEY });
+const app = new FirecrawlApp({ apiKey: process.env.NEXT_PUBLIC_FIRECRAWL });
 
 // Helper function to remove images from markdown
 const removeImages = (markdown: string) => {
