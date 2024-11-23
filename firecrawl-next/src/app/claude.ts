@@ -26,8 +26,24 @@ Return a JSON array where each element has this format:
 }
 `;
 
-async function analyzeSentiments(sentences: string[]): Promise<SentimentResult[] | null> {
+async function analyzeSentiments(sentences: string): Promise<SentimentResult[] | null> {
   try {
+
+    
+    // removed images
+    sentences = sentences
+        .replace(/!\[.*?\]\(.*?\)/g, '')
+        .replace(/<img[^>]*>/g, '')
+        .replace(/\[\[.*?\]\]/g, '')
+        .replace(/\n\s*\n/g, '\n\n');
+    
+    const sentence = sentences
+        .split('.')
+        .filter(sentence => sentence.trim().length > 0)
+        .map(sentence => sentence.trim());
+    
+        
+
     const msg = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20241022",
       max_tokens: 1000,
@@ -36,7 +52,7 @@ async function analyzeSentiments(sentences: string[]): Promise<SentimentResult[]
       messages: [
         {
           role: "user",
-          content: `${systemPrompt}\n\nAnalyze these sentences: ${JSON.stringify(sentences)}`
+          content: `${systemPrompt}\n\nAnalyze these sentences: ${JSON.stringify(sentence)}`
         }
       ]
     });
