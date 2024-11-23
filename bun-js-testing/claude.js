@@ -12,6 +12,20 @@ const anthropic = new Anthropic();
 // Center Example - The debate over renewable energy versus fossil fuels is complex, with valid arguments on both sides. While renewable energy is essential for sustainability, transitioning too quickly could disrupt the economy. Policymakers must find a balanced approach that supports innovation without disregarding the needs of workers in traditional energy sectors.
 // Far Left Example  - Corporate greed is destroying the planet, and the government has done little to stop it. Big Oil continues to pump billions into lobbying efforts, while communities suffer from polluted water, unbreathable air, and worsening climate disasters. The only solution is to dismantle the capitalist structures that prioritize profit over human lives and implement radical reforms to redistribute wealth and protect the environment.
 
+//far right 2- Headline: "The Great Replacement is Real and We Need to Fight Back" Content promotes a narrative of cultural or racial superiority, often laden with fearmongering about immigration or demographic shifts. Such articles may emphasize conspiracies about societal or governmental plans to replace traditional values or demographics.
+//far right 3 - Headline: "LGBTQ+ Activism is Destroying American Values" Discusses topics like "grooming" or claims of cultural erosion, often targeting specific groups like educators or activists. Sentiment is heavily negative, relying on selective or misrepresented facts.
+
+//Right 2 - Headline: "Should Parents Have a Say in School Curriculums?" Balanced tone focusing on parental rights in education but may lean toward skepticism about progressive changes in school systems. Discusses practical impacts with some ideological framing.
+//right 3 - Headline: "Corporate America is Overplaying Its Hand on ESG" Articles critical of progressive corporate policies, suggesting a focus on profit and traditional shareholder values instead of environmental, social, and governance (ESG) initiatives.
+
+//far left 2 - Headline: "Reparations Now: The Only Path to Justice for Historical Injustices" Advocates for systemic overhauls, often using emotional appeals tied to historical grievances or injustices. Sentiment includes anger at perceived inaction and urgency for transformative policies.
+//far left 3 - Headline: "Defund the Police is Just the Start of the Movement" Calls for radical restructuring of societal institutions, emphasizing systemic racism and class struggles. Sentiment is often critical of existing institutions and strongly advocates for change.
+
+//left 2 - Headline: "Healthcare for All: Why the U.S. is Behind Other Nations"Advocates for social policies like universal healthcare, using data comparisons with other countries. Balanced but progressive in suggesting specific reforms. Example Source: The New York Times editorial section.
+//left 3 - Headline: "Why Climate Change is a Human Rights Issue" Discusses the societal impacts of environmental policies, connecting ecological and social justice with an emphasis on collective responsibility.
+
+//center 2 - Center Headline: "Balancing Economic Growth with Environmental Responsibility" Explores the tension between economic expansion and sustainability without taking a definitive ideological stance, presenting arguments from multiple perspectives. Example Source: Articles in Reuters or Associated Press.
+//center 3 - Headline: "The Challenges of Immigration Policy in a Divided Nation". Examines immigration as a policy challenge, presenting data and arguments from both progressive and conservative viewpoints to foster dialogue. Example Source: BBC News or The Hill.
 const exampleOfFarRight2 = ``
 
 const exampleOfFarRight = `
