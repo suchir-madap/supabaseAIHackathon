@@ -1,9 +1,59 @@
 "use client"
 
 import { useState } from 'react'
+import FirecrawlApp, { type ScrapeResponse } from "@mendable/firecrawl-js";
+
+const app = new FirecrawlApp({ apiKey: process.env.NEXT_PUBLIC_FIRECRAWL });
+
+// Function to clean the scraped content
+const cleanScrapedContent = (markdown: string) => {
+  return markdown
+    // Remove navigation and menu items
+    .replace(/\[.*?\]\(.*?\)/g, '')
+    // Remove any URLs
+    .replace(/https?:\/\/[^\s]+/g, '')
+    // Remove video references
+    .replace(/Video.*?\d+:\d+/g, '')
+    // Remove empty lines and extra spaces
+    .replace(/^\s*[\r\n]/gm, '')
+    .replace(/\n\s*\n/g, '\n')
+    // Remove ad-related content
+    .replace(/Ad Feedback/g, '')
+    // Remove CNN specific content
+    .replace(/CNN.*?(?:\r?\n|\r)/g, '')
+    // Clean up multiple spaces
+    .replace(/\s+/g, ' ')
+    .trim();
+};
 
 export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  // This gets sent from chrome current tab
+  const [currentUrl, setCurrentUrl] = useState<string>("cnn.com")
+  const [scrapeResponse, setScrapeResponse] = useState<ScrapeResponse | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  const handleScrapeUrl = async () => {
+    setLoading(true)
+    try {
+      const result = await app.scrapeUrl(currentUrl, {
+        formats: ["markdown"],
+      }) as ScrapeResponse
+      
+      // Clean markdown content before setting response
+      if (result.markdown) {
+        result.markdown = cleanScrapedContent(result.markdown);
+      }
+      
+      setScrapeResponse(result)
+      console.log('Clean Content:', result.markdown)
+      
+    } catch (error) {
+      console.error('Error scraping URL:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -52,11 +102,34 @@ export default function Dashboard() {
 
         {/* Content */}
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Sample cards */}
-          {[1, 2, 3, 4, 5, 6].map((item) => (
+          {/* Update the card content to show scraping results */}
+          {[1].map((item) => (
             <div key={item} className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-2">Project {item}</h3>
-              <p className="text-gray-600">This is a sample project card that you can customize later.</p>
+              <h3 className="text-lg font-semibold mb-2">URL Scraper</h3>
+              <p className="text-gray-600 mb-4">Current URL: {currentUrl}</p>
+              <button
+                onClick={handleScrapeUrl}
+                disabled={loading}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 disabled:bg-gray-400"
+              >
+                {loading ? 'Processing...' : 'Scrape URL'}
+              </button>
+              {scrapeResponse && (
+                <div className="mt-4">
+                  <h4 className="font-semibold mb-2">Scraping Results:</h4>
+                  <pre className="bg-gray-100 p-4 rounded-lg overflow-auto max-h-60 text-sm">
+                    {JSON.stringify(scrapeResponse, null, 2)}
+                  </pre>
+                  {scrapeResponse.markdown && (
+                    <div className="mt-4">
+                      <h4 className="font-semibold mb-2">Markdown Content:</h4>
+                      <div className="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap text-sm">
+                        {scrapeResponse.markdown}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           ))}
         </main>
