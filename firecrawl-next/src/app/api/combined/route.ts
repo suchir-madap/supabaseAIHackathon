@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { analyzeSentiments, type SentimentResult } from '@/app/claude';
+import { analyzeSentiments } from '@/app/claude';
 import { supabase } from '@/supabase/supabase-js-client';
 
 import FirecrawlApp, { type ScrapeResponse } from "@mendable/firecrawl-js";
@@ -43,6 +43,8 @@ export async function POST(request: NextRequest) {
       // get url from request body
       const searchParams = request.nextUrl.searchParams;
       const url = searchParams.get('url');
+
+      console.log("url", url)
 
       // first check if there is already a record for this url
       const { data, error } = await supabase.from('urls').select('*').eq('url', url);
