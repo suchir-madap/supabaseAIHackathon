@@ -93,11 +93,22 @@ import { CountButton } from "~features/count-button"
 
 import "~style.css"
 
+const apiUrl = "https://supabase-ai-hackathon.vercel.app/api/claude"
+
 function IndexPopup() {
+
+  const queryApiRoute = async () => {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log(data);
+  };
+
   return (
     <div className="plasmo-flex plasmo-items-center plasmo-justify-center plasmo-h-16 plasmo-w-40">
       <CountButton />
       <h1>Hello World</h1>
+
+      <button onClick={queryApiRoute}> query api route</button>
     </div>
   )
 }
