@@ -43,6 +43,11 @@ export default function HomePage() {
     }
   };
 
+  const testApiRoute = async () => {
+    const response = await fetch("/api/claude");
+    console.log(response);
+  };
+
   return (
     <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
       <h1>URL Scraper</h1>
@@ -74,6 +79,7 @@ export default function HomePage() {
         >
           {loading ? "Scraping..." : "Scrape URL"}
         </button>
+        <button onClick={testApiRoute}>Test API Route</button>
       </div>
 
       {error && (
