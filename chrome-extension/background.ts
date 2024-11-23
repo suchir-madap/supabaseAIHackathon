@@ -1,5 +1,7 @@
 import { supabase } from "./core/store";
 
+
+
 chrome.runtime.onInstalled.addListener(() => {
   chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
 });
