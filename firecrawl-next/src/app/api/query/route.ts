@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
               'Content-Type': 'application/json',
             },
             // @ts-ignore÷
-            body: JSON.stringify(scrapeData.extract)
+            body: JSON.stringify(scrapeData)
             
           });
         
