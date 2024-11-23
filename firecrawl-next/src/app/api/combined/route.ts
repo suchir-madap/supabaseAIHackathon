@@ -63,8 +63,8 @@ export async function POST(request: NextRequest) {
         }
 
         return NextResponse.json(
-            { message: 'No URL provided' },
-            { status: 400 }
+            { message: 'Success' },
+            { status: 200 }
         );
     } catch (error) {
         console.error('Error in Claude API route:', error);
