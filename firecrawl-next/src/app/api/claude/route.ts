@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { analyzeSentiments, type SentimentResult } from '@/app/claude';
+import { supabase } from '@/supabase/supabase-js-client';
 
 import FirecrawlApp, { type ScrapeResponse } from "@mendable/firecrawl-js";
 import Markdown from 'markdown-to-jsx';
@@ -14,6 +15,31 @@ export async function POST(request: NextRequest) {
       // get url from request body
       const searchParams = request.nextUrl.searchParams;
       const url = searchParams.get('url');
+
+      // start doing supabase stuff here
+
+      // first check if there is already a record for this url
+      const { data, error } = await supabase.from('urls').select('*').eq('url', url);
+      
+      if (data) {
+        console.log('URL already exists in supabase:', data);
+
+        return NextResponse.json(
+          { message: 'URL already exists in supabase', data: data },
+          { status: 200 }
+        );
+      } else {
+        console.log('No existing record found for URL:', url);
+
+        return NextResponse.json(
+          { message: 'No existing record found for URL', data: data },
+          { status: 200 }
+        );
+      }
+
+      if (error) {
+        console.error('Error querying supabase:', error);
+      }
     
       if (!url) {
         return NextResponse.json(
